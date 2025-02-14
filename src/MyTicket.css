@@ -1,0 +1,151 @@
+/* MyTickets.css */
+.modal-overlay {
+    position: fixed; /* Or absolute, depending on context */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+  }
+  
+  .modal-content {
+    background-color: #112233; /* Deep teal/blue-green */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Set a maximum width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .nav {
+    display: flex;
+  }
+  
+  .nav a {
+    color: white;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+  
+  .my-tickets-btn {
+    background-color: #00A896; /* Lighter teal */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to expand and fill space */
+  }
+  
+  .title {
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .step {
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .photo-upload {
+    margin-bottom: 20px;
+  }
+  
+  .upload-area {
+    border: 2px dashed #00A896; /* Dashed border */
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .upload-icon {
+      /* Style your upload icon here */
+      width: 50px;
+      height: 50px;
+      background-color: #00A896;
+      border-radius: 50%;
+      margin-bottom: 10px;
+  }
+  
+  .upload-label {
+      color: white;
+  }
+  
+  .content input,
+  .content textarea {
+    background-color: #1A2B3C; /* Slightly darker background for inputs */
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #00A896; /* Glowing border */
+    border-radius: 5px;
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+  }
+  
+  .content input:focus,
+  .content textarea:focus {
+    border-color: #00A896; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(#00A896, 0.3); /* Add a subtle glow */
+  }
+  
+  .content textarea {
+    height: 120px; /* Adjust height as needed */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .back-btn,
+  .submit-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px; /* Add some spacing between buttons */
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn {
+    background-color: transparent;
+    border: 1px solid #00A896; /* Ghost button */
+    color: #00A896;
+  }
+  
+  .submit-btn {
+    background-color: #00A896; /* Solid button */
+    border: none;
+    color: white;
+  }
+  
+  .back-btn:hover {
+    background-color: rgba(#00A896, 0.1);
+  }
+  
+  .submit-btn:hover {
+    background-color: #009181;
+  }

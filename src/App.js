@@ -1,134 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import './App.css'; // Import your CSS file
-import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
+import React, { useState } from 'react';
+import './TicketSelection.css';
 
-function App() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    avatar: '',
-  });
-  const [errors, setErrors] = useState({});
-  const [ticket, setTicket] = useState(null);
-  const contentRef = React.useRef();
-  
+const TicketSelection = () => {
+  const [selectedTicketType, setSelectedTicketType] = useState('free');
+  const [numTickets, setNumTickets] = useState(1);
 
-  
-  // Load data from localStorage on mount
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem('formData'));
-    if (storedData) {
-      setFormData(storedData);
-    }
-  }, []);
+  const ticketTypes = [
+    { type: 'free', label: 'Free', price: 0, availability: 20 },
+    { type: 'vip', label: 'VIP ACCESS', price: 150, availability: 20 },
+    { type: 'vvip', label: 'VVIP ACCESS', price: 150, availability: 20 },
+  ];
 
-  // Save data to localStorage on change
-  useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(formData));
-  }, [formData]);
-
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' }); // Clear error on input change
+  const handleTicketTypeChange = (type) => {
+    setSelectedTicketType(type);
   };
 
-  const handleAvatarChange = (e) => {
-    // Ideally, you'd integrate Cloudinary or similar here.
-    // For this example, we'll just store the URL directly.
-    const file = e.target.files[0];
-    if (file) {
-        // Simulate Cloudinary upload (replace with actual Cloudinary logic)
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setFormData({ ...formData, avatar: reader.result }); // Set the data URL
-          setErrors({ ...errors, avatar: '' });
-        }
-        reader.readAsDataURL(file); // Or use Cloudinary URL
-      }
-  };
-
-  const validateForm = () => {
-    let newErrors = {};
-    if (!formData.fullName) {
-      newErrors.fullName = 'Full Name is required';
-    }
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    if (!formData.avatar) {
-      newErrors.avatar = 'Avatar is required';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      setTicket({ ...formData, id: uuidv4() }); // Generate a unique ID for the ticket            
-    }
+  const handleNumTicketsChange = (event) => {
+    setNumTickets(parseInt(event.target.value, 10) || 1);
   };
 
   return (
-    <div className="container">
-      <h1>Conference Ticket Generator</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            aria-invalid={!!errors.fullName}
-            aria-describedby="fullNameError"
-          />
-          {errors.fullName && <div className="error" id="fullNameError">{errors.fullName}</div>}
+    <div className="ticket-selection-container">
+      <div className="header">
+        <div className="logo">B tiez</div>
+        <div className="nav">
+          <span>Events</span>
+          <span>My Tickets</span>
+          <span>About Project</span>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email Address:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            aria-invalid={!!errors.email}
-            aria-describedby="emailError"
-          />
-          {errors.email && <div className="error" id="emailError">{errors.email}</div>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="avatar">Avatar:</label>
-          <input
-            type="file" // Use type="file" for avatar upload
-            id="avatar"
-            name="avatar"
-            onChange={handleAvatarChange}
-            aria-invalid={!!errors.avatar}
-            aria-describedby="avatarError"
-            accept="image/*"
-          />
-          {errors.avatar && <div className="error" id="avatarError">{errors.avatar}</div>}
-        </div>
-        <button type="submit" >Generate Ticket</button>
-      </form>
+        <button className="my-tickets-button">MY TICKETS →</button>
+      </div>
 
-      {ticket && (
-        <div className="ticket" ref={contentRef}>
-          <h2>Your Conference Ticket</h2>
-          <p><strong>ID:</strong> {ticket.id}</p> {/* Display the unique ID */}
-          <p><strong>Full Name:</strong> {ticket.fullName}</p>
-          <p><strong>Email:</strong> {ticket.email}</p>
-          <img src={ticket.avatar} alt="Avatar" className="avatar" />
+      <div className="content">
+        <div className="ticket-selection-panel">
+          <div className="steps">Ticket Selection <span className="step-count">Step 1/3</span></div>
+          <div className="event-info">
+            <div className="event-title">Techember Fest '25</div>
+            <div className="event-description">Join us for an unforgettable experience at [Event Name]! Secure your spot now.</div>
+            <div className="event-details">
+              <span>[Event Location]</span> || <span>March 15, 2025 | 7:00 PM</span>
+            </div>
+          </div>
+
+          <div className="ticket-types">
+            {ticketTypes.map((ticket) => (
+              <div
+                key={ticket.type}
+                className={`ticket-type ${selectedTicketType === ticket.type ? 'selected' : ''}`}
+                onClick={() => handleTicketTypeChange(ticket.type)}
+              >
+                <div className="ticket-label">{ticket.label}</div>
+                <div className="ticket-price">${ticket.price}</div>
+                <div className="ticket-availability">{ticket.availability}/52</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="number-of-tickets">
+            <span>Number of Tickets</span>
+            <select value={numTickets} onChange={handleNumTicketsChange}>
+              {[...Array(10)].map((_, i) => ( // Generate options up to 10 (adjust as needed)
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="buttons">
+            <button className="cancel-button">Cancel</button>
+            <button className="next-button">Next</button>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default TicketSelection;

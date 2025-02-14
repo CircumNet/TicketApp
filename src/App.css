@@ -1,68 +1,56 @@
-/* App.css */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+/* TicketSelection.css */
+.ticket-selection-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: sans-serif;
+  background-color: #111; /* Dark background */
+  color: #eee; /* Light text color */
+}
+
+/* ... (rest of the styles) */
+
+.ticket-selection-panel {
+    background-color: #222; /* Slightly lighter panel background */
     padding: 20px;
-    background-color: #f0f0f0; /* Example background color */
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-  }
-  
-  form {
-    width: 400px; /* Adjust as needed */
-    padding: 20px;
-    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.ticket-type {
+    border: 1px solid #4CAF50; /* Green border */
+    color: #4CAF50; /* Green text */
+    /* ... other styles */
+}
+
+.ticket-type.selected {
+    background-color: #4CAF50; /* Green background for selected */
+    color: white; /* White text for selected */
+}
+
+.next-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* ... other styles, including header, buttons, etc. */
+
+select { /* Style the select dropdown */
+    background-color: #333; /* Darker background for select */
+    color: #eee; /* Light text */
+    border: 1px solid #555; /* Slightly lighter border */
+    padding: 8px;
     border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input,
-  button {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  
-  .ticket {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-top: 10px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 500px) {
-    form {
-      width: 90%;
-    }
-  }
+}
+select option {
+  background-color: #444; /* Darker background for options */
+}
